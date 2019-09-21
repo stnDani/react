@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('[App.js] components did mount!');
+    console.log('[App.js] component did mount!');
   }
 
   deletePersonHandler = (personIndex) => {
