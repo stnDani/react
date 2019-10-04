@@ -10,8 +10,18 @@ const Cockpit = (props) => {
         setTimeout(() => {
             alert('Saved data to cloud');
         }, 1000);
-
+        // it runs before the main useEffect, but after the first render cycle
+        return (() => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        });
     }, [props.persons]);
+
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return (() => {
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+        });
+    }); 
 
     const assignedClasses = [];
     let btnClass = '';
