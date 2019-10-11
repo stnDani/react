@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Aux from '../../../hoc/Auxiliary';
 import withClass from '../../../hoc/withClass';
-import classes from './Person.css';
+import classes from './Person.module.css';
 
 //instead of aux we can use the Fragment component
 class Person extends Component {

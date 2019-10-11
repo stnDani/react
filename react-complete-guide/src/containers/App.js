@@ -20,7 +20,8 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -64,8 +65,15 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
-  }
+    //this is the correct way to update the state when you depend on the old state
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
+    });
+
+  };
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -88,7 +96,7 @@ class App extends Component {
 
     return (
       <Aux>
-      <button onClick={() => {
+        <button onClick={() => {
           this.setState({ showCockpit: false });
         }}>
           Remove Cockpit
@@ -101,7 +109,7 @@ class App extends Component {
             clicked={this.togglePersonsHandler}
           /> : null}
         {persons}
-        </Aux>
+      </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
