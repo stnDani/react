@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Aux from '../../../hoc/Auxiliary';
 import withClass from '../../../hoc/withClass';
 import classes from './Person.module.css';
+import AuthContext from '../../../context/auth-context';
 
 //instead of aux we can use the Fragment component
 class Person extends Component {
@@ -21,7 +22,11 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <Aux>
-                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please log in!</p>}
+                <AuthContext.Consumer>
+                
+                    {context => context.authenticated ? <p>Authenticated!</p> : <p>Please log in!</p>}
+                </AuthContext.Consumer>
+
                 <p key="i1" onClick={this.props.click}>
                     I'm {this.props.name} and I am {this.props.age} years old!
                 </p>
